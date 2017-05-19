@@ -14,7 +14,10 @@ class UNREAL_MARS_API AGamePlayController : public APlayerController
 {
 	GENERATED_BODY()
 	
-	
+public:
+
+	// The Interactable the player is currently looing at. This will be nullptr if the player is not looking at something that is interactable
+	class AInteractable* CurrentInteractable;
 	
 	
 };

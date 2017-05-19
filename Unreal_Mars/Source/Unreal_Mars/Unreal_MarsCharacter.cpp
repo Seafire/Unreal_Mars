@@ -2,6 +2,8 @@
 
 #include "Unreal_MarsCharacter.h"
 #include "Kismet/HeadMountedDisplayFunctionLibrary.h"
+#include "Interactable.h"
+#include "GamePlayController.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
@@ -76,6 +78,31 @@ void AUnreal_MarsCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AUnreal_MarsCharacter::OnResetVR);
 }
 
+void AUnreal_MarsCharacter::CheckForInteractables()
+{
+	FHitResult HitResult;
+
+	FVector StartTrace = FollowCamera->GetComponentLocation();
+	FVector EndTrace = (FollowCamera->GetForwardVector() * 300) + StartTrace;
+
+	FCollisionQueryParams QueryParams;
+	QueryParams.AddIgnoredActor(this);
+
+	AGamePlayController* Controller = Cast<AGamePlayController>(GetController());
+
+	if (GetWorld()->LineTraceSingleByChannel(HitResult, StartTrace, EndTrace, ECC_Visibility, QueryParams) && Controller)
+	{
+		// Check if the item we hit was an interactable Item
+		if (AInteractable* Interactable = Cast<AInteractable>(HitResult.GetActor()))
+		{
+			Controller->CurrentInteractable = Interactable;
+			return;
+		}
+	}
+
+	// If we didn't hit anything or the thing hit was not interactable
+	Controller->CurrentInteractable = nullptr;
+}
 
 void AUnreal_MarsCharacter::OnResetVR()
 {
