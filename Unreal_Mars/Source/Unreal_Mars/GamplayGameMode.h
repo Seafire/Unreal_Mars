@@ -14,7 +14,13 @@ class UNREAL_MARS_API AGamplayGameMode : public AGameMode
 {
 	GENERATED_BODY()
 	
-	
-	
+public:
+
+	class UDataTable* GetItemDB() const { return ItemID; }
+
+protected:
+
+	UPROPERTY(EditDefaultsOnly)
+	class UDataTable* ItemID;
 	
 };

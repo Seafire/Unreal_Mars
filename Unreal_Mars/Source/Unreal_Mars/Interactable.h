@@ -18,7 +18,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
+public:
 	/*
 	* The Function that is called when the player interacts with the interactable
 	* This function is marker as BlueprintImplementableEvent so that designers
