@@ -2,6 +2,8 @@
 
 #include "GamePlayController.h"
 #include "Interactable.h"
+#include "GamplayGameMode.h"
+#include "Unreal_MarsCharacter.h"
 #include "Unreal_Mars.h"
 
 void AGamePlayController::SetupInputComponent()
@@ -18,6 +20,19 @@ void AGamePlayController::Interact()
 		CurrentInteractable->Interact(this);
 	}
 
+}
+
+void AGamePlayController::AddItemToInventoryByID(FName ID)
+{
+	AGamplayGameMode* GameMode = Cast<AGamplayGameMode>(GetWorld()->GetAuthGameMode());
+	UDataTable* ItemTable = GameMode->GetItemDB();
+
+	FInventoryItem* ItemToAdd = ItemTable->FindRow<FInventoryItem>(ID, "");
+
+	if (ItemToAdd)
+	{
+		Inventory.Add(*ItemToAdd);
+	}
 }
 
 

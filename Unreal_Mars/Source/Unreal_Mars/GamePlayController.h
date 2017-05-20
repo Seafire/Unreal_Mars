@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "Unreal_MarsCharacter.h"
 #include "GamePlayController.generated.h"
 
 /**
@@ -16,14 +17,21 @@ class UNREAL_MARS_API AGamePlayController : public APlayerController
 	
 public:
 
+	UFUNCTION (BlueprintCallable, Category = "Utils")
+	void AddItemToInventoryByID(FName ID);
+
 	// The Interactable the player is currently looing at. This will be nullptr if the player is not looking at something that is interactable
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	class AInteractable* CurrentInteractable;
+
+	UPROPERTY (BlueprintReadWrite, VisibleAnywhere)
+	TArray<FInventoryItem> Inventory;
 	
-	void Interact();
 
 protected:
 
 	virtual void SetupInputComponent() override;
+
+	void Interact();
 	
 };
