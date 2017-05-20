@@ -14,7 +14,16 @@ class UNREAL_MARS_API APickUp : public AInteractable
 {
 	GENERATED_BODY()
 	
-	
-	
+public:
+
+	APickUp();
+
+protected:
+
+	UPROPERTY (EditAnywhere)
+	UStaticMeshComponent* PickupMesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FName ItemID;
 	
 };

@@ -17,6 +17,7 @@ class UNREAL_MARS_API AGamePlayController : public APlayerController
 public:
 
 	// The Interactable the player is currently looing at. This will be nullptr if the player is not looking at something that is interactable
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	class AInteractable* CurrentInteractable;
 	
 	

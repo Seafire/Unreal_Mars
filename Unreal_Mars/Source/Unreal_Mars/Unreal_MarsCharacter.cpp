@@ -104,6 +104,13 @@ void AUnreal_MarsCharacter::CheckForInteractables()
 	Controller->CurrentInteractable = nullptr;
 }
 
+void AUnreal_MarsCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	CheckForInteractables();
+}
+
 void AUnreal_MarsCharacter::OnResetVR()
 {
 	UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
