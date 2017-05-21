@@ -21,6 +21,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Pickup")
 	void OnUsed();
 
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Pickup")
+	void Drop();
+
 protected:
 
 	UPROPERTY (EditAnywhere)
