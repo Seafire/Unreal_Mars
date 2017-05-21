@@ -18,6 +18,9 @@ public:
 
 	APickUp();
 
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Pickup")
+	void OnUsed();
+
 protected:
 
 	UPROPERTY (EditAnywhere)

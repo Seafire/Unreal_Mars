@@ -35,6 +35,31 @@ void AGamePlayController::AddItemToInventoryByID(FName ID)
 	}
 }
 
+void AGamePlayController::CraftItem(FInventoryItem ItemA, FInventoryItem ItemB, AGamePlayController* Controller)
+{
+	// Check we've made a valid craft
+	for (auto Craft : ItemB.CraftCombitations)
+	{
+		if (Craft.ComponentID == ItemA.ItemID)
+		{
+			if (Craft.bDestroyItemA)
+			{
+				Inventory.RemoveSingle(ItemA);
+				
+			}
+
+			if (Craft.DestroyItemB)
+			{
+				Inventory.RemoveSingle(ItemB);
+			}
+
+			AddItemToInventoryByID(Craft.ProductID);
+
+			ReloadInventory();
+		}
+	}
+}
+
 
 
 

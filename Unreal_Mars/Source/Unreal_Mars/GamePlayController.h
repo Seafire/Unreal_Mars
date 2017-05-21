@@ -17,8 +17,14 @@ class UNREAL_MARS_API AGamePlayController : public APlayerController
 	
 public:
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void ReloadInventory();
+
 	UFUNCTION (BlueprintCallable, Category = "Utils")
 	void AddItemToInventoryByID(FName ID);
+
+	UFUNCTION(BlueprintCallable, Category = "Utils")
+	void CraftItem(FInventoryItem ItemA, FInventoryItem ItemB, AGamePlayController* Controller);
 
 	// The Interactable the player is currently looing at. This will be nullptr if the player is not looking at something that is interactable
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
